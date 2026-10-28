@@ -1,0 +1,465 @@
+{
+ "title": "ML Classification & Regression Test",
+ "passing": 60,
+ "time_limit_min": 40,
+ "questions": [
+  {
+   "id": 1,
+   "q": "What does this code print?",
+   "code": "x = [10, 20, 30, 40, 50]\nprint(x[1:4])",
+   "options": [
+    "[10, 20, 30, 40]",
+    "[20, 30, 40, 50]",
+    "[10, 20, 30]",
+    "[20, 30, 40]"
+   ],
+   "answer": 3,
+   "topic": "Python basics",
+   "hint": "A slice x[a:b] starts at index a and stops BEFORE index b. Python counts from 0.",
+   "explain": "Indexes 1, 2, 3 are selected (the stop index 4 is not included), so the result is [20, 30, 40]."
+  },
+  {
+   "id": 2,
+   "q": "What does this code print?",
+   "code": "nums = [1, 2, 3, 4]\nprint([n * n for n in nums if n % 2 == 0])",
+   "options": [
+    "[4, 16]",
+    "[1, 4, 9, 16]",
+    "[2, 4]",
+    "[4, 8]"
+   ],
+   "answer": 0,
+   "topic": "Python basics",
+   "hint": "Read it from the right: first the loop, then the condition that filters, and only then the expression at the front.",
+   "explain": "Only the even numbers 2 and 4 pass the if-filter. Each one is squared: 2×2 = 4 and 4×4 = 16 → [4, 16]."
+  },
+  {
+   "id": 3,
+   "q": "What does this code print?",
+   "code": "def price(a, b=2):\n    return a * b\n\nprint(price(3), price(3, 4))",
+   "options": [
+    "6 6",
+    "6 12",
+    "5 7",
+    "3 12"
+   ],
+   "answer": 1,
+   "topic": "Python basics",
+   "hint": "When you do not pass b, Python uses its default value. When you do pass it, the default is ignored.",
+   "explain": "price(3) uses the default b = 2, so 3 × 2 = 6. price(3, 4) uses b = 4, so 3 × 4 = 12."
+  },
+  {
+   "id": 4,
+   "q": "Which line shows how many missing values each column of df has?",
+   "options": [
+    "df.isna()",
+    "df.dropna().sum()",
+    "df.isna().sum()",
+    "df.shape"
+   ],
+   "answer": 2,
+   "topic": "pandas",
+   "hint": "Think in two steps: mark which cells are missing, then count those marks for each column. Which option does both?",
+   "explain": "df.isna() gives a True/False table. .sum() then adds the True values (True = 1) down each column, giving one count per column."
+  },
+  {
+   "id": 5,
+   "q": "df has the columns age and city. Which line keeps only people older than 30 who live in Tashkent?",
+   "options": [
+    "df[df[\"age\"] > 30 and df[\"city\"] == \"Tashkent\"]",
+    "df[(df[\"age\"] > 30) & (df[\"city\"] == \"Tashkent\")]",
+    "df[(df[\"age\"] > 30) & (df[\"city\"] = \"Tashkent\")]",
+    "df[\"age\" > 30 & \"city\" == \"Tashkent\"]"
+   ],
+   "answer": 1,
+   "topic": "pandas",
+   "hint": "Check three details in each option: the sign pandas uses for AND, the brackets around each condition, and = versus ==.",
+   "explain": "pandas combines conditions with & (not the word and), each condition needs its own ( ), and a comparison uses == (a single = is assignment)."
+  },
+  {
+   "id": 6,
+   "q": "What does this code print?",
+   "code": "df = pd.DataFrame({\"city\": [\"A\", \"B\", \"A\", \"B\"],\n                   \"sales\": [10, 20, 30, 40]})\nprint(df.groupby(\"city\")[\"sales\"].mean())",
+   "options": [
+    "A → 40.0, B → 60.0",
+    "A → 2, B → 2",
+    "A → 20.0, B → 30.0",
+    "A → 10.0, B → 20.0"
+   ],
+   "answer": 2,
+   "topic": "pandas",
+   "hint": "Split the rows by city first. Then decide what the summary function does to each small group: add, count, take the first, or something else?",
+   "explain": "City A has sales 10 and 30, mean = 20. City B has 20 and 40, mean = 30. .mean() averages each group."
+  },
+  {
+   "id": 7,
+   "q": "Which line fills the missing values in the column age with the median of that column?",
+   "options": [
+    "df[\"age\"] = df[\"age\"].fillna(df[\"age\"].median())",
+    "df[\"age\"].fillna(df[\"age\"].median())",
+    "df.dropna(df[\"age\"].median())",
+    "df[\"age\"] = df[\"age\"].isna().median()"
+   ],
+   "answer": 0,
+   "topic": "pandas",
+   "hint": "Two things to check: which function gives the middle value, and does the line SAVE its result back into df? Most pandas methods return a new object.",
+   "explain": "fillna returns a new Series. Without = the result is thrown away and df does not change. Assigning it back to df[\"age\"] keeps the filled values."
+  },
+  {
+   "id": 8,
+   "q": "Which algorithm can solve ONLY classification problems?",
+   "options": [
+    "Linear Regression",
+    "Decision Tree",
+    "Random Forest",
+    "Logistic Regression"
+   ],
+   "answer": 3,
+   "topic": "Choosing a model",
+   "hint": "Check each name in scikit-learn: some have a Classifier version AND a Regressor version, others only do one kind of job.",
+   "explain": "Decision Tree and Random Forest have both a classifier and a regressor version. Linear Regression predicts numbers only. Logistic Regression is the one that only predicts classes."
+  },
+  {
+   "id": 9,
+   "q": "Before any threshold is applied, what does the output of logistic regression look like?",
+   "options": [
+    "Any real number, like a house price",
+    "Only the integer 0 or 1",
+    "A probability between 0 and 1",
+    "A distance in the units of the target"
+   ],
+   "answer": 2,
+   "topic": "Logistic regression & metrics",
+   "hint": "An S-shaped function squeezes the model's raw score into a fixed range. Which range makes sense for 'how likely is class 1?'",
+   "explain": "Logistic regression passes its score through the sigmoid function, which gives a value between 0 and 1. A threshold (usually 0.5) then turns it into a class."
+  },
+  {
+   "id": 10,
+   "q": "A logistic regression flags a customer as 'will churn' when probability ≥ 0.5. The company lowers the threshold to 0.3. What usually happens?",
+   "options": [
+    "Fewer customers are flagged, so recall goes up",
+    "Both precision and recall always increase",
+    "Nothing changes because the model weights stay the same",
+    "More customers are flagged: recall goes up and precision usually goes down"
+   ],
+   "answer": 3,
+   "topic": "Logistic regression & metrics",
+   "hint": "It is easier to pass a lower bar. If more customers pass, think about how many real churners you catch, and how many wrong flags you add.",
+   "explain": "A lower threshold labels more cases as positive. You catch more real positives (higher recall) but also add more false alarms (precision usually drops). The weights stay the same, but the predicted classes change."
+  },
+  {
+   "id": 11,
+   "q": "Look at the two plots. Which one shows logistic regression?",
+   "visual": "visuals/logistic_vs_linear.svg",
+   "options": [
+    "Plot 1",
+    "Plot 2",
+    "Both plots",
+    "Neither plot"
+   ],
+   "answer": 1,
+   "topic": "Logistic regression & metrics",
+   "hint": "Compare what the y-axis holds in each plot, and the SHAPE of each fitted line. Can the line leave the range 0 to 1?",
+   "explain": "Plot 2 has 0/1 classes on the y-axis and an S-shaped sigmoid curve that stays between 0 and 1: that is logistic regression. Plot 1 fits a straight line to a numeric target, which is linear regression."
+  },
+  {
+   "id": 12,
+   "q": "A bank tests a fraud model on 1,000 transactions: 950 are normal and 50 are fraud. The model predicts \"normal\" for every transaction, so accuracy is 95%. Which metric shows the model is useless?",
+   "options": [
+    "Recall for the fraud class (0%)",
+    "Accuracy, because 95% is high",
+    "Precision for the normal class (95%)",
+    "The number of rows in the data"
+   ],
+   "answer": 0,
+   "topic": "Logistic regression & metrics",
+   "hint": "A high score can hide a model that never finds the rare class. Count how many of the 50 fraud cases it found, then ask which metric turns that count into a score.",
+   "explain": "The model found 0 of the 50 fraud cases, so fraud recall is 0%. Accuracy looks great only because 95% of the data is one class. This is why accuracy is misleading on imbalanced data."
+  },
+  {
+   "id": 13,
+   "q": "An email spam filter must avoid sending real emails to the spam folder. Which metric matters most?",
+   "options": [
+    "Recall",
+    "Accuracy",
+    "Precision",
+    "RMSE"
+   ],
+   "answer": 2,
+   "topic": "Logistic regression & metrics",
+   "hint": "Think about the mistake that hurts most: a real email called spam. Is that a false alarm or a miss? Then pick the metric that punishes that kind of error.",
+   "explain": "Precision = of all emails the filter called spam, how many really were spam. A real email in the spam folder is a false positive, and precision drops when false positives increase. RMSE is a regression metric."
+  },
+  {
+   "id": 14,
+   "q": "A hospital model screens for a serious disease. Missing a sick patient is much worse than a false alarm. Which metric should the team focus on?",
+   "options": [
+    "Recall",
+    "Precision",
+    "Accuracy",
+    "Mean squared error"
+   ],
+   "answer": 0,
+   "topic": "Logistic regression & metrics",
+   "hint": "Which error is worse here: a healthy person flagged, or a sick person missed? Choose the metric that counts the worse error.",
+   "explain": "Recall = of all really sick patients, how many did the model find. A missed patient is a false negative, and recall drops when false negatives increase."
+  },
+  {
+   "id": 15,
+   "q": "Using this confusion matrix, what is the recall of the Positive class?",
+   "visual": "visuals/confusion_matrix.svg",
+   "options": [
+    "0.60",
+    "0.67",
+    "0.70",
+    "0.80"
+   ],
+   "answer": 3,
+   "topic": "Logistic regression & metrics",
+   "hint": "Recall looks only at the REAL positive cases. Find that row in the matrix, then ask how many of them the model got right.",
+   "explain": "The real positives are the top row: 40 + 10 = 50. The model found 40 of them, so recall = 40 / 50 = 0.80. (0.67 is the precision, 0.70 is the accuracy.)"
+  },
+  {
+   "id": 16,
+   "q": "A model has TP = 30, FP = 10, FN = 20 and TN = 40. What is its precision?",
+   "options": [
+    "0.75",
+    "0.70",
+    "0.60",
+    "0.25"
+   ],
+   "answer": 0,
+   "topic": "Logistic regression & metrics",
+   "hint": "Precision looks only at what the model CALLED positive. Which two numbers together make up 'called positive', and how many of those were right?",
+   "explain": "Called positive = TP + FP = 30 + 10 = 40. Correct ones = 30. Precision = 30 / 40 = 0.75. (0.60 is the recall, 0.70 is the accuracy.)"
+  },
+  {
+   "id": 17,
+   "q": "A model has precision = 0.50 and recall = 1.00. What is its F1 score (rounded)?",
+   "options": [
+    "0.50",
+    "0.67",
+    "0.75",
+    "1.00"
+   ],
+   "answer": 1,
+   "topic": "Logistic regression & metrics",
+   "hint": "F1 is not the ordinary average of the two scores. It stays low when one of them is low.",
+   "explain": "F1 is the harmonic mean: 2 × (0.50 × 1.00) / (0.50 + 1.00) = 1.00 / 1.50 ≈ 0.67. The simple average would be 0.75, but F1 punishes the weak precision."
+  },
+  {
+   "id": 18,
+   "q": "Look at the three plots. Which one shows linear regression?",
+   "visual": "visuals/three_models.svg",
+   "options": [
+    "Plot X",
+    "Plot Y",
+    "Plot Z",
+    "None of them"
+   ],
+   "answer": 0,
+   "topic": "Linear regression",
+   "hint": "Linear regression predicts a number. Compare the SHAPE of each fitted line and the kind of values on each y-axis.",
+   "explain": "Plot X fits one straight line through numeric data: linear regression. Plot Y is an S-curve on 0/1 classes (logistic regression). Plot Z is a staircase, typical for a decision tree regressor."
+  },
+  {
+   "id": 19,
+   "q": "What do the dashed vertical segments between the points and the line represent?",
+   "visual": "visuals/residuals.svg",
+   "options": [
+    "The slope of the line at each point",
+    "The intercept of the model",
+    "Residuals: the error between each actual value and the predicted value",
+    "The decision boundary between two classes"
+   ],
+   "answer": 2,
+   "topic": "Linear regression",
+   "hint": "Each segment connects a real point to the line's prediction for the same x. What does that gap measure?",
+   "explain": "The gap between the actual y and the predicted y is the residual (error). MSE, RMSE and MAE are all built from these gaps."
+  },
+  {
+   "id": 20,
+   "q": "A model predicts house price from size, number of rooms and age of the building, using one straight-line equation. What is this called?",
+   "options": [
+    "Multiple linear regression",
+    "Simple linear regression",
+    "Logistic regression",
+    "Polynomial regression"
+   ],
+   "answer": 0,
+   "topic": "Linear regression",
+   "hint": "Count the input features. One feature and many features have different names.",
+   "explain": "Simple linear regression uses ONE feature. With several features (size, rooms, age) it is multiple linear regression. Polynomial regression would add powers like size²."
+  },
+  {
+   "id": 21,
+   "q": "Model A makes many small mistakes. Model B makes a few huge mistakes. Which metric punishes Model B's huge mistakes more strongly?",
+   "options": [
+    "MAE, because it takes absolute values",
+    "R², because it is always between 0 and 1",
+    "Neither: MSE and MAE always rank models the same way",
+    "MSE, because it squares each error"
+   ],
+   "answer": 3,
+   "topic": "Linear regression",
+   "hint": "Compare an error of 10 with an error of 1 under each formula. Which formula makes the big error count far more than 10 times bigger?",
+   "explain": "MSE squares each error, so one error of 10 counts 100 times, not 10 times. MAE only takes the absolute value, so it treats big and small errors in proportion. (R² can also be negative.)"
+  },
+  {
+   "id": 22,
+   "q": "A linear regression model has R² = 0.85. What does this mean?",
+   "options": [
+    "85% of its predictions are exactly correct",
+    "The average error is 0.85 units",
+    "The model explains about 85% of the variation in the target",
+    "The model is 85% accurate, like a classifier"
+   ],
+   "answer": 2,
+   "topic": "Linear regression",
+   "hint": "R² compares your model with a very simple baseline that always predicts the average. Is it counting correct predictions, or comparing errors?",
+   "explain": "R² is the share of the target's variation that the model explains compared with always predicting the mean. A regression model has no 'exactly correct' predictions, so accuracy-style wording is wrong."
+  },
+  {
+   "id": 23,
+   "q": "Your linear regression has 200 features and many of them are useless. Which regularization can shrink some coefficients to exactly zero, removing those features?",
+   "options": [
+    "Lasso",
+    "Ridge",
+    "Ordinary least squares",
+    "Min-Max scaling"
+   ],
+   "answer": 0,
+   "topic": "Linear regression",
+   "hint": "The two penalties differ in shape: one adds the absolute size of each weight, the other adds the squared size. Which one can push a weight all the way to zero?",
+   "explain": "Lasso adds an absolute-value penalty, which can set coefficients exactly to zero (feature selection). Ridge only shrinks them toward zero. Ordinary least squares has no penalty, and Min-Max scaling is not regularization."
+  },
+  {
+   "id": 24,
+   "q": "Do decision trees and random forests need feature scaling (like StandardScaler)?",
+   "options": [
+    "Yes. Both need StandardScaler, or the splits are wrong",
+    "No. They give the same splits with or without scaling, so they handle both fine",
+    "Yes. They need a special tree-only scaler",
+    "Only random forest needs it, because it has many trees"
+   ],
+   "answer": 1,
+   "topic": "Decision tree & random forest",
+   "hint": "A tree asks questions like 'is age > 30?'. Would the same rows land on the same sides of a split if you multiplied age by 1000 and moved the threshold with it?",
+   "explain": "Trees split one feature at a time by a threshold, and scaling does not change the order of the values, so the same splits are found. Scaling is needed for distance-based or gradient-based models, not for trees or forests."
+  },
+  {
+   "id": 25,
+   "q": "A decision tree gets 100% accuracy on the training data but only 70% on the test data. Which change most directly helps?",
+   "options": [
+    "Remove max_depth so the tree can grow deeper",
+    "Apply StandardScaler to every feature",
+    "Limit the tree with a smaller max_depth",
+    "Train the tree on the test data only"
+   ],
+   "answer": 2,
+   "topic": "Decision tree & random forest",
+   "hint": "100% on training but much lower on new data means the tree memorized. How could you stop it from asking so many very specific questions?",
+   "explain": "A big gap between train and test accuracy is overfitting. Limiting max_depth (or min_samples_leaf) keeps the tree simpler. Scaling does not affect trees, and training on test data is data leakage."
+  },
+  {
+   "id": 26,
+   "q": "Why is a random forest usually less overfitted than one deep decision tree?",
+   "options": [
+    "It is one tree with a smaller learning rate",
+    "It removes all noisy rows before training",
+    "It only works when there are two features",
+    "It averages many trees trained on random samples and feature subsets, so single-tree mistakes cancel out"
+   ],
+   "answer": 3,
+   "topic": "Decision tree & random forest",
+   "hint": "Think of asking a crowd instead of asking one person. What would make each person in the crowd give a different opinion?",
+   "explain": "A random forest trains many trees on random bootstrap samples with random feature subsets, then averages (or votes). Their different errors partly cancel, which lowers variance."
+  },
+  {
+   "id": 27,
+   "q": "What does Gini impurity measure at a node of a decision tree?",
+   "options": [
+    "The number of leaves under the node",
+    "How mixed the classes are inside the node (0 means pure)",
+    "The learning rate of the node",
+    "The R² of the node"
+   ],
+   "answer": 1,
+   "topic": "Decision tree & random forest",
+   "hint": "A split is good when each side becomes more 'clean'. What would it mean for a node to be clean, and which number could describe that?",
+   "explain": "Gini impurity is 0 when all samples in a node belong to one class, and larger when classes are mixed. The tree picks splits that reduce impurity the most."
+  },
+  {
+   "id": 28,
+   "q": "Which pair of algorithms can solve BOTH classification and regression problems?",
+   "options": [
+    "Linear Regression and Logistic Regression",
+    "Logistic Regression and Random Forest",
+    "Linear Regression and Decision Tree",
+    "Decision Tree and Random Forest"
+   ],
+   "answer": 3,
+   "topic": "Choosing a model",
+   "hint": "Think about what a tree's leaf can hold: a class label or an average number. Which algorithms use leaves like that?",
+   "explain": "A tree leaf can output a majority class (classification) or an average value (regression), so Decision Tree and Random Forest do both. Linear Regression is regression only, and Logistic Regression is classification only."
+  },
+  {
+   "id": 29,
+   "q": "What does encoding do in a machine learning pipeline?",
+   "options": [
+    "Rescales numeric columns to the range 0–1",
+    "Fills missing values with the column mean",
+    "Turns categories or text into numbers a model can use",
+    "Removes duplicate rows"
+   ],
+   "answer": 2,
+   "topic": "Encoding & scaling",
+   "hint": "Think about a column full of words like 'red' and 'blue'. What must happen to those words before a model can calculate with them?",
+   "explain": "Encoding converts categorical or text columns into numbers (for example one-hot or label encoding). Rescaling, filling missing values and removing duplicates are other preprocessing steps."
+  },
+  {
+   "id": 30,
+   "q": "Look at the Color column before and after. Which encoding method produced the table on the right?",
+   "visual": "visuals/onehot_table.svg",
+   "options": [
+    "Label encoding",
+    "One-hot encoding",
+    "Ordinal encoding",
+    "Min-Max scaling"
+   ],
+   "answer": 1,
+   "topic": "Encoding & scaling",
+   "hint": "Count the columns before and after. What does each new column answer for a row, and which values can it hold?",
+   "explain": "One-hot encoding (pd.get_dummies) creates one 0/1 column per category. Each row has exactly one 1. Label and ordinal encoding keep a single column of integers."
+  },
+  {
+   "id": 31,
+   "q": "A City column was converted to City_code as shown, and the result is given to a logistic regression. What is the main problem?",
+   "visual": "visuals/label_encoding_table.svg",
+   "options": [
+    "The numbers are too small, so MinMaxScaler must be applied first",
+    "scikit-learn cannot read integer columns",
+    "Label codes always make training slower",
+    "The model treats 2 as 'bigger' than 0, creating an order between cities that does not exist"
+   ],
+   "answer": 3,
+   "topic": "Encoding & scaling",
+   "hint": "Look at the numbers 0, 1, 2. A linear or logistic formula multiplies each feature by a weight. What does that do to how the values compare with each other?",
+   "explain": "Label encoding gives each city an arbitrary integer. Linear and logistic models read the numbers as ordered distances, so Tashkent (2) looks 'twice' Samarkand (1). For unordered categories, use one-hot encoding."
+  },
+  {
+   "id": 32,
+   "q": "You standardize features before training a logistic regression. What is the correct way to use StandardScaler with a train/test split?",
+   "options": [
+    "Fit on the full dataset before splitting",
+    "Fit on the training set only, then transform both the train and test sets",
+    "Fit separately on the test set",
+    "Fit on the test set and transform the train set"
+   ],
+   "answer": 1,
+   "topic": "Encoding & scaling",
+   "hint": "The test set must behave like brand-new, unseen data. Which data is allowed to teach the scaler its mean and standard deviation?",
+   "explain": "The scaler must learn its mean and std from training data only. Fitting on the full data or on the test set leaks information from the test set into training (data leakage)."
+  }
+ ]
+}

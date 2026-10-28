@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ML Classification &amp; Regression Test</title>
+  <meta name="theme-color" content="#091126" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+</head>
+<body>
+
+  <!-- WELCOME -->
+  <section id="welcome" class="screen active">
+    <header class="welcome-bar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i></span>ML Classification &amp; Regression Test</div>
+      <div class="practice-status"><span></span> Practice mode</div>
+    </header>
+    <div class="welcome-layout">
+      <main class="welcome-copy">
+        <h1>Check your<br>ML models<span class="accent-dot">.</span></h1>
+        <p class="welcome-lede">32 questions: Python and pandas, logistic regression and its metrics, linear regression, decision trees, random forests, and encoding.</p>
+
+        <div class="info-grid" aria-label="Exam details">
+          <div><span class="stat-icon" aria-hidden="true">□</span><span id="q-count" class="value">32</span><span class="label">Questions</span></div>
+          <div><span class="stat-icon clock-icon" aria-hidden="true"></span><span id="time-limit-label" class="value">40 min</span><span class="label">Time limit</span></div>
+          <div><span class="stat-icon target-icon" aria-hidden="true">◎</span><span class="value">60%</span><span class="label">Pass mark</span></div>
+          <div><span class="stat-icon" aria-hidden="true">≡</span><span class="value">Single</span><span class="label">Choice</span></div>
+        </div>
+
+        <div class="identity-fields">
+          <label class="field"><span>Full name</span>
+            <input id="student-name" type="text" placeholder="Enter your full name" autocomplete="off" /></label>
+          <label class="field"><span>Group</span>
+            <input id="student-group" type="text" placeholder="e.g. AI/ML-Tashkent" autocomplete="off" /></label>
+        </div>
+
+        <details class="rules-disclosure">
+          <summary>Before you begin <span>Exam rules</span></summary>
+          <ul class="rules">
+            <li>Stuck? Press <b>Hint</b>. It shows you how to think — it does not give the answer.</li>
+            <li>Navigate freely using Previous, Next, or the question grid.</li>
+            <li>Flag any question and return to it before submitting.</li>
+            <li>The quiz auto-submits when the 40-minute timer reaches zero.</li>
+            <li>You can change any answer until you submit.</li>
+          </ul>
+        </details>
+
+        <button id="start-btn" class="btn primary start-btn" disabled>Start quiz <span aria-hidden="true">→</span></button>
+        <p id="start-hint" class="muted small start-hint">Enter your name and group to start.</p>
+      </main>
+
+      <aside class="welcome-visual" aria-label="Machine learning reminders">
+        <div class="visual-heading">
+          <span>Quick reminder</span>
+          <p>Read the question. Look at the data. Then choose the model.</p>
+        </div>
+        <div class="type-cards">
+          <div class="type-card"><code>.fit()</code><b>train</b><span>learn from data</span></div>
+          <div class="type-card"><code>.predict()</code><b>predict</b><span>use the model</span></div>
+          <div class="type-card"><code>0 / 1</code><b>class</b><span>a label, not a number scale</span></div>
+        </div>
+        <div class="lib-row">
+          <span><b>sk</b> scikit-learn · models</span>
+          <span><b>pd</b> pandas · tables</span>
+          <span><b>P·R·F1</b> classification scores</span>
+          <span><b>MSE·R²</b> regression scores</span>
+        </div>
+        <div class="visual-note"><span class="spark">✦</span><b>Classes or numbers?</b><span>Predicting a label is classification. Predicting an amount is regression.</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- EXAM -->
+  <section id="exam" class="screen">
+    <header class="exam-bar">
+      <span class="exam-title"><span class="brand-mark small-mark" aria-hidden="true"><i></i><i></i></span>ML Classification &amp; Regression Test</span>
+      <div class="exam-meta">
+        <div class="progress-wrap"><span id="progress-label" class="progress-label">Question 1 of 32</span><span class="progress-track"><i id="progress-fill"></i></span></div>
+        <span id="timer" class="timer"><i aria-hidden="true"></i>40:00</span>
+      </div>
+    </header>
+
+    <div class="exam-body">
+      <main class="question-panel">
+        <div class="q-head">
+          <span id="q-number" class="q-number">Question 1</span>
+          <span id="q-topic" class="q-topic">Topic</span>
+          <button id="flag-btn" class="flag-btn" type="button">⚑ Flag for review</button>
+        </div>
+        <div id="q-text" class="q-text"></div>
+        <pre id="q-code" class="q-code" hidden></pre>
+        <img id="q-visual" class="q-visual" alt="" hidden />
+        <div id="options" class="options"></div>
+
+        <div class="learn-row">
+          <button id="hint-btn" class="learn-btn hint" type="button">Hint</button>
+          <button id="explain-btn" class="learn-btn explain" type="button">Explain simply</button>
+          <button id="diagram-btn" class="learn-btn diagram" type="button">Visual guide</button>
+        </div>
+        <div id="hint-panel" class="learn-panel hint" hidden></div>
+        <div id="explain-panel" class="learn-panel explain" hidden></div>
+        <div id="diagram-panel" class="learn-panel diagram" hidden></div>
+
+        <div class="q-footer">
+          <button id="prev-btn" class="btn ghost">◀ Previous</button>
+          <div class="spacer"></div>
+          <button id="next-btn" class="btn navy">Next ▶</button>
+          <button id="submit-btn" class="btn primary" hidden>Submit Quiz</button>
+        </div>
+      </main>
+
+      <aside class="navigator">
+        <div class="nav-head"><div><div class="nav-title">Question navigator</div><div class="nav-subtitle">Jump to any question</div></div><div id="nav-progress" class="nav-progress"><span>0%</span></div></div>
+        <div id="nav-grid" class="nav-grid"></div>
+        <div class="nav-legend">
+          <span><i class="lg answered"></i> Answered</span>
+          <span><i class="lg current"></i> Current</span>
+          <span><i class="lg flagged"></i> Flagged</span>
+          <span><i class="lg"></i> Not answered</span>
+        </div>
+        <div id="nav-summary" class="nav-summary muted small"></div>
+        <button id="submit-btn-2" class="btn primary full">Submit Quiz</button>
+      </aside>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="screen">
+    <div class="card">
+      <h1>Your Result</h1>
+      <p id="results-student" class="muted"></p>
+      <div class="score-hero">
+        <div id="pass-fail" class="pass-fail">--</div>
+        <div id="score-big" class="big-score">--</div>
+        <div class="muted">out of 100 · pass mark 60</div>
+      </div>
+      <div id="topic-breakdown" class="section-scores"></div>
+      <p id="save-status" class="muted small"></p>
+      <h3>Review</h3>
+      <div id="review" class="breakdown"></div>
+    </div>
+  </section>
+
+  <!-- SUBMIT CONFIRM -->
+  <div id="confirm-modal" class="modal-overlay">
+    <div class="modal">
+      <h2>Submit quiz?</h2>
+      <p id="confirm-summary" class="muted"></p>
+      <p>You cannot change your answers after submitting.</p>
+      <div class="modal-actions">
+        <button id="confirm-cancel" class="btn ghost">Keep going</button>
+        <button id="confirm-submit" class="btn primary">Yes, submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=1"></script>
+</body>
+</html>
