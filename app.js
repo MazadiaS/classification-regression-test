@@ -6,7 +6,7 @@
    ============================================================ */
 const WEBHOOK_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
 
-const STORAGE_KEY = "ml_classification_regression_state_v1";
+const STORAGE_KEY = "ml_classification_regression_state_v2";
 const DEFAULT_TIME_MIN = 40;
 
 let QUESTIONS = [];
@@ -30,7 +30,7 @@ const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 /* ---------- boot ---------- */
 async function boot(){
   try{
-    const res = await fetch("questions.json?v=1");
+    const res = await fetch("questions_v2.json?v=2");
     const data = await res.json();
     QUESTIONS = data.questions;
     PASS_MARK = data.passing || 60;
