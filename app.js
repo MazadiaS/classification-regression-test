@@ -4,7 +4,7 @@
    Results saved to a Google Sheet via Apps Script (see SETUP.md).
    >>> paste your Web App URL below: <<<
    ============================================================ */
-const WEBHOOK_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyBWcvN2N5eEvDVOzNMDUvafkzCJCYS95fjWKZ-cCNpTK5sbwDTI9-OQR4UHi2FM_Dt/exec";
 
 const STORAGE_KEY = "ml_classification_regression_state_v2";
 const DEFAULT_TIME_MIN = 40;
